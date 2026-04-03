@@ -18,8 +18,23 @@ app.add_middleware(
 )
 
 # --- 1. CONFIGURATION ---
-# Replace with your actual API key from Google AI Studio
-API_KEY = "AIzaSyAR5cGGRFXGziNjoMsuMHapf1I3PTtz0QQ"
+# API Key is loaded from environment variable to avoid public exposure
+API_KEY = os.getenv('GAI_API_KEY')
+if not API_KEY:
+    raise RuntimeError('GAI_API_KEY environment variable not set. Please configure your Google Gemini key in your environment.')
+
+# Optionally support local .env file if available (needs python-dotenv installed)
+if not API_KEY:
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+        API_KEY = os.getenv('GAI_API_KEY')
+    except ImportError:
+        pass
+
+if not API_KEY:
+    raise RuntimeError('GAI_API_KEY environment variable not set. Please configure your Google Gemini key in your environment.')
+
 genai.configure(api_key=API_KEY)
 
 # Use Gemini 2.0 Flash (current model, free tier available)
