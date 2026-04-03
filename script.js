@@ -301,6 +301,31 @@ AI:`;
         }
     }
 
+    function exportChat() {
+        if (chatMessages.length === 0) {
+            addMessage('system', 'No messages to export yet.', '<i class="fas fa-info-circle"></i>');
+            speak('No messages are available for export yet.');
+            return;
+        }
+
+        const lines = chatMessages.map(msg => {
+            const timestamp = new Date(msg.timestamp).toLocaleString();
+            const role = msg.type === 'user' ? 'You' : msg.type === 'ai' ? 'AI' : 'System';
+            return `${timestamp} [${role}]: ${msg.content}`;
+        });
+
+        const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `karan-ai-chat-${Date.now()}.txt`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        addMessage('system', 'Chat export ready. Download started.', '<i class="fas fa-download"></i>');
+        speak('Chat transcript export started. Check your downloads folder.');
+    }
+
     // ===========================================
     // EVENT LISTENERS
     // ===========================================
@@ -342,6 +367,9 @@ AI:`;
                 case 'settings':
                     addMessage('system', 'Settings panel not implemented yet. Voice commands are the primary interface.', '<i class="fas fa-cog"></i>');
                     speak("Settings panel is not available in this version. Please use voice commands.");
+                    break;
+                case 'export':
+                    exportChat();
                     break;
                 case 'reset':
                     if (confirm('Reset the system? This will clear chat history and reset to locked mode.')) {
