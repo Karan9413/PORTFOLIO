@@ -66,11 +66,11 @@ async def chat(user_msg: str, unlocked: bool = False):
     user_query = user_msg.lower()
     
     # 3. THE "OMEGA" SECURITY CHECK (Local Logic)
-    if "sunny" in user_query or "luna" in user_query:
+    if "bhati ji" in user_query or "boss" in user_query:
         if not unlocked:
             return {"reply": "Access Denied. This information is encrypted. Please provide the biometric unlock phrase."}
         else:
-            return {"reply": "Biometric match confirmed. Sunny (also known as Luna) is Karan's partner and a key part of his personal world."}
+            return {"reply": "Biometric match confirmed. bhati ji (also known as boss) is Karan's partner and a key part of his personal world."}
 
     # 4. ATTEMPT CLOUD PROCESSING (Gemini)
     try:
