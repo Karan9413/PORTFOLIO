@@ -1,0 +1,77 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        flake8 main.py --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 main.py --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Check syntax
+      run: python -m py_compile main.py
+
+    - name: Test API endpoints (basic)
+      run: |
+        pip install requests
+        python -c "
+        import subprocess
+        import time
+        import requests
+        import sys
+
+        # Start server in background
+        server = subprocess.Popen(['python', 'main.py'])
+        time.sleep(3)
+
+        try:
+            # Test health check
+            response = requests.get('http://localhost:8000/docs')
+            if response.status_code == 200:
+                print('✅ API server is responding')
+            else:
+                print('❌ API server not responding')
+                sys.exit(1)
+        except Exception as e:
+            print(f'❌ Error testing API: {e}')
+            sys.exit(1)
+        finally:
+            server.terminate()
+            server.wait()
+        "
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
+        cname: karan-ai-twin.netlify.app  # Optional: add custom domain
