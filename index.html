@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARAN_BHATI // AI_OS_V3</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="locked-theme">
+
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-particles"></div>
+    <div class="scanner-line"></div>
+
+    <!-- Main Interface -->
+    <div class="app-container">
+
+        <!-- Header -->
+        <header class="system-header">
+            <div class="header-left">
+                <div class="system-status">
+                    <i class="fas fa-circle status-dot"></i>
+                    <span class="status-text">SYSTEM ONLINE</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <h1 class="system-title">KARAN_BHATI<span class="version">//AI_OS_V3</span></h1>
+            </div>
+            <div class="header-right">
+                <div class="connection-status">
+                    <i class="fas fa-wifi connection-icon"></i>
+                    <span class="connection-text">NEURAL LINK ACTIVE</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="main-grid">
+
+            <!-- Left Panel - System Info -->
+            <aside class="left-panel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-server"></i> SYSTEM CORE</h3>
+                </div>
+                <div class="system-metrics">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="metric-info">
+                            <label>CORE PROCESSOR</label>
+                            <div class="metric-value">FastAPI / Python 3.12</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="metric-info">
+                            <label>ACTIVE PROJECTS</label>
+                            <div class="metric-value">Pardarshi // Dariyav</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="metric-info">
+                            <label>LOCATION</label>
+                            <div class="metric-value">Jaipur, India<br><small>26.91°N, 75.78°E</small></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center Panel - Avatar & Chat -->
+            <main class="center-panel">
+                <div class="avatar-section">
+                    <div class="avatar-container">
+                        <div class="avatar-frame">
+                            <img src="karan_pro.png" alt="Karan Bhati" class="avatar-image">
+                            <div class="avatar-overlay"></div>
+                            <div class="avatar-glow"></div>
+                        </div>
+                        <div class="avatar-info">
+                            <h2>Karan Bhati</h2>
+                            <p>AI Digital Twin</p>
+                            <div class="status-badges">
+                                <span class="badge badge-locked">ACCESS: RESTRICTED</span>
+                                <span class="badge badge-ai">NEURAL LINK: ACTIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-section">
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="message system-message">
+                                <div class="message-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-text">System initialized. Awaiting voice command...</div>
+                                    <div class="message-time">Just now</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input-area">
+                            <div class="voice-indicator" id="voice-indicator">
+                                <div class="voice-wave">
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                </div>
+                                <span class="voice-text">Listening...</span>
+                            </div>
+                            <button class="voice-button" id="talk-btn">
+                                <i class="fas fa-microphone"></i>
+                                <span>Initialize Voice Link</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Panel - Terminal & Controls -->
+            <aside class="right-panel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-terminal"></i> VOICE TERMINAL</h3>
+                </div>
+
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-controls">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                        </div>
+                        <span class="terminal-title">NEURAL_INTERFACE</span>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-output">
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$</span>
+                                <span class="terminal-command">system.status</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-output-text" id="ai-status">ACCESS: RESTRICTED</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$</span>
+                                <span class="terminal-command">voice.listen</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-output-text" id="subtitle">Awaiting biometric voice trigger...</span>
+                            </div>
+                        </div>
+                        <div class="terminal-input">
+                            <span class="terminal-prompt">$</span>
+                            <input type="text" class="terminal-input-field" placeholder="Type command or use voice..." readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="action-btn" data-action="help">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help</span>
+                    </button>
+                    <button class="action-btn" data-action="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </button>
+                    <button class="action-btn" data-action="reset">
+                        <i class="fas fa-redo"></i>
+                        <span>Reset</span>
+                    </button>
+                </div>
+            </aside>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="system-footer">
+            <div class="footer-left">
+                <span class="footer-text">© 2026 Karan Bhati Digital Systems</span>
+            </div>
+            <div class="footer-center">
+                <div class="system-metrics-mini">
+                    <span class="metric">CPU: <span id="cpu-usage">24%</span></span>
+                    <span class="metric">MEM: <span id="mem-usage">67%</span></span>
+                    <span class="metric">NET: <span id="net-status">ACTIVE</span></span>
+                </div>
+            </div>
+            <div class="footer-right">
+                <span class="footer-text">v3.1.4-stable</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Initializing Neural Link...</div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+    <div class="system-footer">
+        <span class="glitch" data-text="KARAN_BHATI_DIGITAL_TWIN_V3.0">KARAN_BHATI_DIGITAL_TWIN_V3.0</span>
+        <span class="security-tag" id="sec-status">SECURITY_LEVEL: ALPHA</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
