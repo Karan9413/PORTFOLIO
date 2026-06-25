@@ -46,52 +46,99 @@
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.12+
-- Google Gemini API Key
-- Modern web browser with microphone support
+## 🚀 Quick Start
 
-### Installation
+### Prerequisites
+- Python 3.12 or newer
+- Google Gemini API key (set as `GAI_API_KEY`)
+- Git (optional)
 
+<<<<<<< HEAD
 1. **Clone the repository**
    ```bash
    git clone https://github.com/Karan9413/PORTFOLIO.git
    cd PORTFOLIO
    ```
+=======
+### Installation & Run (recommended)
+>>>>>>> c458d19 (docs: update README installation steps)
 
-2. **Install dependencies**
-   ```bash
-   pip install fastapi uvicorn google-generativeai python-multipart
-   ```
+1. Clone the repository (optional):
+```bash
+git clone https://github.com/Karan9413/PORTFOLIO.git
+cd PORTFOLIO
+```
 
-3. **Configure API Key**
-   Edit `main.py` and replace the API key:
-   ```python
-   API_KEY = "your_google_gemini_api_key_here"
-   ```
+2. Create and activate a virtual environment:
 
-4. **Run the application**
-   ```bash
-   # Start the FastAPI backend
-   python main.py
+Windows (PowerShell):
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
 
-   # In another terminal, serve the frontend
-   python -m http.server 8080
-   ```
+macOS / Linux:
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
-5. **Access the interface**
-   Open your browser and navigate to: `http://localhost:8080`
+3. Install dependencies using the requirements file (preferred):
+```bash
+pip install -r requirements.txt
+```
+If `requirements.txt` is not available, install minimal dependencies:
+```bash
+pip install fastapi uvicorn python-dotenv google-generativeai
+```
 
----
+4. Configure the API key (choose one):
+- Create a file named `.env` in the project root with this line:
+  ```text
+  GAI_API_KEY=your_google_gemini_api_key_here
+  ```
+  The backend will load `.env` automatically if `python-dotenv` is installed.
 
+- Or set an environment variable for the current session:
+  - PowerShell:
+    ```powershell
+    $env:GAI_API_KEY = 'your_google_gemini_api_key_here'
+    ```
+  - macOS / Linux:
+    ```bash
+    export GAI_API_KEY='your_google_gemini_api_key_here'
+    ```
+
+5. Start the backend (FastAPI):
+```bash
 ## 🎯 Usage
 
 ### Voice Commands
 - **"Initialize Voice Link"** - Start the voice interface
 - **"Unlock my world"** - Access personal information mode
+```
+
+6. Serve the frontend (in a separate terminal):
+```bash
 - **"Lock my world"** - Return to professional mode
 - **Ask questions** - Query about Karan, projects, skills, etc.
 
+7. Open the app in your browser:
+ - Frontend: http://localhost:8080
+ - API health/test: http://127.0.0.1:8000/chat?user_msg=hello
+
+### Quick test (PowerShell)
+```powershell
+
 ### Example Interactions
+
+### Troubleshooting
+- If port 8000 is already in use, either stop the process using it or run the backend on a different port:
+  ```bash
+  uvicorn main:app --host 127.0.0.1 --port 8001
+  ```
+- If the server reports a missing API key, verify `.env` is present or the `GAI_API_KEY` env var is set.
+- For production, run behind a production server (Gunicorn / Docker) and secure your API key.
 ```
 User: "Tell me about Karan"
 AI: "I am Karan Bhati, a 2nd-year CSE student at GEC Jaipur..."
